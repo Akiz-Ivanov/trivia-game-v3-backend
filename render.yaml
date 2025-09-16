@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: trivia-game-backend
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: MONGODB_URI
+        value: ${MONGODB_URI}
+      - key: SECRET
+        value: ${SECRET}
+      - key: FRONTEND_URL
+        value: ${FRONTEND_URL}
