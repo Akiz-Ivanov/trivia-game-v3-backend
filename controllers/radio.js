@@ -135,6 +135,28 @@ radioRouter.get('/countries', async (req, res) => {
 })
 
 //*====== GET TAGS ======*//
+radioRouter.get('/tags', async (req, res) => {
+  const { limit = 100 } = req.query
+
+  try {
+    const data = await radioService.makeRadioRequest('tags', {
+      order: 'stationcount',
+      hidebroken: true,
+      reverse: true,
+      limit: parseInt(limit)
+    })
+
+    res.json(data)
+
+  } catch (error) {
+    console.error('Failed to get tags:', error.message)
+    res.status(503).json({
+      error: 'Service unavailable',
+      message: 'Please try again later'
+    })
+  }
+})
+
 radioRouter.get('/tags/:tag', async (req, res) => {
 
   const { limit = 100 } = req.query
