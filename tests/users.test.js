@@ -179,7 +179,6 @@ describe('user tests when there is initially one user in db', () => {
 
       assert(usersAtEnd.length === usersAtStart.length)
 
-      console.log(response.body.error)
       assert(response.body.error.includes('username must be unique'))
     })
 

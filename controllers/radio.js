@@ -1,9 +1,10 @@
 const radioRouter = require('express').Router()
 const radioService = require('../services/radioService')
+const logger = require('../utils/logger')
 
 radioService.getServersWithCache()
   .then(servers => {
-    console.log(`Radio service initialized with ${servers.length} servers`)
+    logger.info(`Radio service initialized with ${servers.length} servers`)
   })
   .catch(error => {
     console.error('Radio service initialization failed:', error.message)

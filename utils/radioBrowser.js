@@ -2,6 +2,7 @@ const axios = require('axios')
 const dns = require('dns')
 const util = require('util')
 const RADIO_CONFIG = require('../utils/radioConfig')
+const logger = require('../utils/logger')
 
 const FALLBACK_SERVERS = [
   'https://de1.api.radio-browser.info/json',
@@ -27,11 +28,11 @@ const getRadioBrowserBaseUrls = async () => {
       .sort((a, b) => a.name.localeCompare(b.name))
       .map(host => `https://${host.name.replace(/\.$/, '')}/json`) //* Remove trailing dot and add /json
 
-    console.log('Discovered Radio Browser servers:', urls)
+    logger.info('Discovered Radio Browser servers:', urls)
     return urls
 
   } catch (error) {
-    console.error('DNS SRV lookup failed:', error.message)
+    logger.error('DNS SRV lookup failed:', error.message)
 
     //* Fallback to hardcoded servers if DNS fails
     return FALLBACK_SERVERS
@@ -53,18 +54,18 @@ const checkServerHealth = async (servers) => {
 
       if (response.status === 200) {
         workingServers.push(server)
-        console.log(`✓ ${server} is working`)
+        logger.info(`✓ ${server} is working`)
       }
     } catch (error) {
-      console.log(`x Server ${server} is down: ${error.code || error.message}`)
+      logger.error(`x Server ${server} is down: ${error.code || error.message}`)
     }
   }
 
   if (workingServers.length > 0) {
-    console.log('Working servers:', workingServers)
+    logger.info('Working servers:', workingServers)
     return workingServers
   } else {
-    console.log('No servers working, using all discovered servers as fallback')
+    logger.info('No servers working, using all discovered servers as fallback')
   }
 }
 
@@ -76,7 +77,7 @@ const getWorkingServers = async () => {
     const healthy = await checkServerHealth(discovered)
     return healthy
   } catch (error) {
-    console.error('Failed to get working servers:', error.message)
+    logger.error('Failed to get working servers:', error.message)
     return FALLBACK_SERVERS
   }
 }
