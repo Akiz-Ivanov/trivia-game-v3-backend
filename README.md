@@ -99,7 +99,7 @@ POST /api/login          # User login
 ### Radio Proxy
 ```http
 GET /api/radio/*         # Proxy to Radio Browser API
-                        # with automatic server selection
+                         # with automatic server selection
 ```
 
 ## 🚀 Quick Start
