@@ -14,6 +14,7 @@ A robust Node.js backend API powering the Trivia Flair 3.0 game. Provides user a
   - [🔐 Authentication System](#-authentication-system)
   - [📻 Radio Proxy Service](#-radio-proxy-service)
   - [🛡️ Robust Error Handling](#️-robust-error-handling)
+- [⚠️ Deployment Notes](#️-deployment-notes)
 - [🛠️ Tech Stack](#️-tech-stack)
 - [🏗️ Architecture](#️-architecture)
   - [Controllers](#controllers)
