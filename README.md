@@ -54,6 +54,15 @@ A robust Node.js backend API powering the Trivia Flair 3.0 game. Provides user a
 - **Input validation** using the validator library
 - **Unknown endpoint handling** for better API responses
 
+## ⚠️ Deployment Notes
+
+This backend is currently deployed on Render's free tier, which has the following limitations:
+- **Cold starts**: The server spins down after 15 minutes of inactivity, causing a 30-60 second delay on the first request
+- **Mitigation**: The frontend implements health checks and automatically falls back to direct Radio Browser API calls if the backend is unavailable
+- Users can also access hardcoded popular stations and localStorage favorites without any backend dependency
+
+For production deployment, consider using a paid tier or alternative hosting to eliminate cold starts.
+
 ## 🛠️ Tech Stack
 
 - **Node.js** + **Express 5.1** - Core server framework
